@@ -1,40 +1,56 @@
-import React, { Component, PropTypes } from 'react'
+//import React, { Component, PropTypes } from 'react'
+//import { bindActionCreators } from 'redux'
+//import { connect } from 'react-redux'
+//import Header from '../components/Header'
+//import MainSection from '../components/MainSection'
+//import * as TodoActions from '../actions'
+//
+//class App extends Component {
+//  render() {
+//    const { todos, actions } = this.props;
+//    return (
+//      <div>
+//        <Header addTodo={actions.addTodo} />
+//        <MainSection todos={todos} actions={actions} />
+//      </div>
+//    )
+//  }
+//}
+//
+//App.propTypes = {
+//  todos: PropTypes.array.isRequired,
+//  actions: PropTypes.object.isRequired
+//}
+//
+//function mapStateToProps(state) {
+//  return {
+//    todos: state.todos
+//  }
+//}
+//
+//function mapDispatchToProps(dispatch) {
+//  return {
+//    actions: bindActionCreators(TodoActions, dispatch)
+//  }
+//}
+//
+//export default connect(
+//  mapStateToProps,
+//  mapDispatchToProps
+//)(App)
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Header from '../components/Header'
-import MainSection from '../components/MainSection'
-import * as TodoActions from '../actions'
-
-class App extends Component {
-  render() {
-    const { todos, actions } = this.props;
-    return (
-      <div>
-        <Header addTodo={actions.addTodo} />
-        <MainSection todos={todos} actions={actions} />
-      </div>
-    )
-  }
-}
-
-App.propTypes = {
-  todos: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
-}
+import Counter from '../components/Counter'
+import * as CounterActions from '../actions'
 
 function mapStateToProps(state) {
   return {
-    todos: state.todos
+    counter: state.counter
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(TodoActions, dispatch)
-  }
+  return bindActionCreators(CounterActions, dispatch)
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(Counter)

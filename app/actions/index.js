@@ -1,25 +1,42 @@
-import * as types from '../constants/ActionTypes';
+export const SET_COUNTER = 'SET_COUNTER'
+export const INCREMENT_COUNTER = 'INCREMENT_COUNTER'
+export const DECREMENT_COUNTER = 'DECREMENT_COUNTER'
 
-export function addTodo(text) {
-  return { type: types.ADD_TODO, text }
+export function set(value) {
+  return {
+    type: SET_COUNTER,
+    payload: value
+  }
 }
 
-export function deleteTodo(id) {
-  return { type: types.DELETE_TODO, id }
+export function increment() {
+  return {
+    type: INCREMENT_COUNTER
+  }
 }
 
-export function editTodo(id, text) {
-  return { type: types.EDIT_TODO, id, text }
+export function decrement() {
+  return {
+    type: DECREMENT_COUNTER
+  }
 }
 
-export function completeTodo(id) {
-  return { type: types.COMPLETE_TODO, id }
+export function incrementIfOdd() {
+  return (dispatch, getState) => {
+    const { counter } = getState()
+
+    if (counter % 2 === 0) {
+      return
+    }
+
+    dispatch(increment())
+  }
 }
 
-export function completeAll() {
-  return { type: types.COMPLETE_ALL }
-}
-
-export function clearCompleted() {
-  return { type: types.CLEAR_COMPLETED }
+export function incrementAsync(delay = 1000) {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(increment())
+    }, delay)
+  }
 }
