@@ -74,12 +74,13 @@ module.exports = {
     //  inject:true,  //允许插件修改哪些内容，包括head与body
     //  hash:false //为静态资源生成hash值
     //}),//添加我们的插件 会自动生成一个html文件
-    new webpack.DefinePlugin({ //开发模式
-      "process.env": {
-        NODE_ENV: JSON.stringify("development") //development,production
-      }
-    }),
-    new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    //new webpack.DefinePlugin({ //开发模式
+    //  "process.env": {
+    //    NODE_ENV: JSON.stringify("development") //development,production
+    //  }
+    //}),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
   ]
 };

@@ -1,9 +1,11 @@
 import path from 'path';
+import fs from 'fs';
 import Express from 'express';
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 import webpack from 'webpack';
+var rewrite = require('express-urlrewrite');
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './webpack.config';
@@ -14,13 +16,24 @@ import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import routes from './app/router.js';
 
-
 const app = new Express();
 const port = 3000;
 
 const compiler = webpack(webpackConfig);
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }));
+app.use(webpackDevMiddleware(compiler, {
+  noInfo: true,
+  lazy: true,
+  hot: true,
+  stats: { colors: true },
+  publicPath: webpackConfig.output.publicPath,
+  historyApiFallback: true
+}));
 app.use(webpackHotMiddleware(compiler));
+
+fs.readdirSync(__dirname).forEach(function (file) {
+  if (fs.statSync(path.join(__dirname, file)).isDirectory())
+    app.use(rewrite('/' + file + '/*', '/' + file + '/index.html'))
+});
 
 app.use(function(req, res) {
   match({ routes: routes, location: req.url }, (error, redirectLocation, renderProps) => {
