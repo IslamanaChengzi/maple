@@ -38,7 +38,7 @@ var path = require('path');
 
 module.exports = {
   entry: [
-    //'webpack-dev-server/client?http://localhost:3000',
+    'webpack-dev-server/client?http://localhost:3000',
     //'webpack/hot/dev-server',
     'webpack-hot-middleware/client',
     './app/main'
