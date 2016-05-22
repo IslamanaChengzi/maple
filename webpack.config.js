@@ -41,12 +41,12 @@ module.exports = {
     //'webpack-dev-server/client?http://localhost:3000',
     //'webpack/hot/dev-server',
     'webpack-hot-middleware/client',
-    './client/index'
+    './app/main'
 
   ],
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/static/',
+    path: path.resolve(__dirname, './build'),
+    publicPath: '/build/',
     filename: 'bundle.js'
   },
   resolve: {
