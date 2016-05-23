@@ -19,6 +19,15 @@ import routes from './app/router.js';
 const app = new Express();
 const port = 3000;
 
+
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware} from 'redux'
+import thunk from 'redux-thunk' //中间键，diapatch异步实现
+import { syncHistoryWithStore } from 'react-router-redux'
+
+import rootReducer from './app/reducers/index'
+
+
 const compiler = webpack(webpackConfig);
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
@@ -44,7 +53,15 @@ app.use(function(req, res) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      var maple = renderToString(React.createElement(RouterContext, renderProps));
+      const store = createStore(
+        rootReducer,
+        applyMiddleware(thunk)
+      );
+      const maple = renderToString(
+        <Provider store={store}>
+          <RouterContext {...renderProps}/>
+        </Provider>
+      );
       var page = swig.renderFile('./views/index.html', {maple: maple});
       res.send(200, page);
       //res.render('index', {maple: maple});
