@@ -35,7 +35,7 @@ import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 
 import configureStore from './app/store/configureStore'
-import App from './app/containers/App'
+import App from './app/containers/MainContainer'
 import { fetchCounter } from './app/api/counter'
 
 const app = new Express();

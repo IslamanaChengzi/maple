@@ -38,9 +38,9 @@ var path = require('path');
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    //'webpack/hot/dev-server',
-    'webpack-hot-middleware/client',
+    //'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/dev-server',
+    //'webpack-hot-middleware/client',
     './app/main'
 
   ],
@@ -79,7 +79,6 @@ module.exports = {
     //    NODE_ENV: JSON.stringify("development") //development,production
     //  }
     //}),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]

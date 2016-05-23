@@ -1,14 +1,14 @@
 import React from 'react';
-import { Route, Link, IndexRoute, Redirect } from 'react-router';
+import { Router, Route, Link, IndexRoute, Redirect } from 'react-router';
 
-import App from './components/App';
-import Home from './components/Home';
-import Home2 from './components/Home2';
 
+import Demo from './components/Demo';
+import Maple from './containers/Maple';
+import Home from './containers/Home';
 export default (
-  <Route component={App}>
-    <Route path='/' component={Home} />
-    <Route path='/a' component={Home2} />
+  <Route path='/' component={Maple}>
+    <IndexRoute component={Home}/>
+    <Route path='demo' component={Demo} />
   </Route>
 );
 
