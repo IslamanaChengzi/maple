@@ -62,7 +62,9 @@ app.use(function(req, res) {
           <RouterContext {...renderProps}/>
         </Provider>
       );
-      var page = swig.renderFile('./views/index.html', {maple: maple});
+      const initialState = store.getState();
+
+      var page = swig.renderFile('./views/index.html', {maple: maple, initialState: initialState});
       res.send(200, page);
       //res.render('index', {maple: maple});
     } else {
