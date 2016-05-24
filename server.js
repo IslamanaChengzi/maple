@@ -1,11 +1,11 @@
 import path from 'path';
 import fs from 'fs';
 import Express from 'express';
-var logger = require('morgan');
-var bodyParser = require('body-parser');
+import logger from 'morgan';
+import bodyParser from 'body-parser';
 
 import webpack from 'webpack';
-var rewrite = require('express-urlrewrite');
+import rewrite from 'express-urlrewrite';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './webpack.config';
@@ -27,12 +27,16 @@ import routes from './app/router.js';
 //后端接口路由
 import index from './routes/index';
 //引入公共函数
-import * as SEO from './app/lib/SEO'
-
+import * as SEO from './app/lib/SEO';
 
 const app = new Express();
 const port = 3000;
 
+fs.readdirSync(__dirname).forEach(function (file) {
+  if (fs.statSync(path.join(__dirname, file)).isDirectory())
+    app.use(rewrite('/' + file + '/*', '/' + file + '/index.html'));
+});
+//引入 webpack 配置
 const compiler = webpack(webpackConfig);
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
@@ -45,10 +49,6 @@ app.use(webpackDevMiddleware(compiler, {
 }));
 app.use(webpackHotMiddleware(compiler));
 
-fs.readdirSync(__dirname).forEach(function (file) {
-  if (fs.statSync(path.join(__dirname, file)).isDirectory())
-    app.use(rewrite('/' + file + '/*', '/' + file + '/index.html'));
-});
 //数据接口
 app.use('/api', index);
 //视图渲染
