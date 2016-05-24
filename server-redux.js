@@ -36,7 +36,7 @@ import { Provider } from 'react-redux'
 
 import configureStore from './app/store/configureStore'
 import App from './app/containers/MainContainer'
-import { fetchCounter } from './app/api/counter'
+import { fetchCounter } from 'app/lib/counter'
 
 const app = new Express();
 const port = 3000;

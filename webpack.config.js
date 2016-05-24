@@ -58,7 +58,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015'],
+        loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0'],
         include: __dirname
       },
       {test: /\.less$/, loader: "style!css!less", include: __dirname},

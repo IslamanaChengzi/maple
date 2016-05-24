@@ -12,9 +12,9 @@ import Maple from './containers/Maple';
 import Home from './containers/Home';
 
 export default (
-  <Route path='/' component={Maple}>
-    <IndexRoute component={Home}/>
-    <Route path='demo' component={Demo} />
+  <Route path='/' component={ Maple } >
+    <IndexRoute component={ Home } />
+    <Route path='demo' component={ Demo } />
   </Route>
 );
 
