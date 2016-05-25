@@ -29,6 +29,7 @@ class Maple extends React.Component {
     console.log(a);
   };
   render() {
+    const { routes } = this.props;
     return (
       <div>
         <button onClick={ (e) => this.test(e) }>Maple</button>

@@ -39,8 +39,8 @@ var path = require('path');
 module.exports = {
   entry: [
     //'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/dev-server',
-    //'webpack-hot-middleware/client',
+    //'webpack/hot/dev-server',
+    'webpack-hot-middleware/client',
     './app/main'
 
   ],
@@ -58,7 +58,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0'],
+        loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0,presets[]=stage-1,presets[]=stage-2,presets[]=stage-3'],
         include: __dirname
       },
       {test: /\.less$/, loader: "style!css!less", include: __dirname},
