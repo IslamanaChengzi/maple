@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 
 import * as DemoActions from '../actions'
 
+import { translate, Interpolate } from 'react-i18next';
+import i18n from '../i18n-client';
+
 function mapStateToProps(state) {
   return { demo: state.demo };
 }
@@ -11,6 +14,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(DemoActions, dispatch) }
 }
+
+
 
 class Maple extends React.Component {
   constructor(props) {
@@ -34,6 +39,7 @@ class Maple extends React.Component {
       <div>
         <button onClick={ (e) => this.test(e) }>Maple</button>
         {this.props.children}
+        {i18n.t('a:test1')}
       </div>
     );
   }

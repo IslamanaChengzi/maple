@@ -11,17 +11,13 @@ i18n
     fallbackLng: 'en',
 
     // have a common namespace used around the full app
-    ns: ['demo'],
+    ns: ['demo', 'a'],
     defaultNS: 'demo',
 
     debug: true,
 
     interpolation: {
       escapeValue: false // not needed for react!!
-    },
-    backend: {
-      loadPath: 'locales/{{lng}}/{{ns}}.json',
-      jsonIndent: 2
     }
   });
 

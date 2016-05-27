@@ -6,8 +6,13 @@
   "license": "MIT",
   "keywords": [
     "maple",
-    "maple",
-    "react"
+    "i18next",
+    "react",
+    "redux",
+    "server rendering",
+    "swig",
+    "immutable",
+    "webpack"
   ],
   "contributors": [
     "maple"
@@ -29,7 +34,6 @@
     "body-parser": "^1.15.1",
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
-    "ejs": "^2.4.1",
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
     "express-urlrewrite": "^1.2.0",
