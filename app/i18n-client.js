@@ -10,11 +10,14 @@ i18n
   .init({
     preload: ['en', 'zh','zh-CN'],
     fallbackLng: 'en',
-
+    //lng: 'zh',
     // have a common namespace used around the full app
     ns: ['demo', 'a'],
     defaultNS: 'demo',
-
+    backend:{
+      // path where resources get loaded from
+      loadPath: './locales/{{lng}}/{{ns}}.json'
+    },
     debug: true,
 
     interpolation: {

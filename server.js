@@ -23,15 +23,16 @@ import thunk from 'redux-thunk' //中间键，diapatch异步实现
 import { syncHistoryWithStore } from 'react-router-redux'
 import rootReducer from './app/reducers/index'
 
-import { I18nextProvider } from 'react-i18next';
-import i18nMiddleware from 'i18next-express-middleware';
-import i18n from './app/i18n-server';
+//import { I18nextProvider } from 'react-i18next';
+//import i18nMiddleware from 'i18next-express-middleware';
+//import i18n from './app/i18n-server';
 
 //路由部分
 //前端路由
 import routes from './app/router.js';
 //后端接口路由
-import index from './routes/index';
+import interfaces from './routes/interfaces';
+import locales from './routes/locales';
 //引入公共函数
 import * as SEO from './app/lib/SEO';
 
@@ -60,31 +61,32 @@ app.use(webpackDevMiddleware(compiler, {
   historyApiFallback: true
 }));
 app.use(webpackHotMiddleware(compiler));
-
+//访问语言文件
+app.use('/locales', locales);
 //数据接口
+app.use('/interfaces', interfaces);
 //视图渲染
 app.use(function(req, res) {
   match({ routes: routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    //res.send(200, routes);
+
     if (error) {
       res.status(500).send(error.message);
     } else if (redirectLocation) {
       res.status(302).redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
+
       const store = createStore(
         rootReducer,
         applyMiddleware(thunk)
       );
-
       const maple = renderToString(
-        <I18nextProvider i18n={ i18n }>
-          <Provider store={store}>
-            <RouterContext {...renderProps}/>
-          </Provider>
-        </I18nextProvider>
+        <Provider store={store}>
+          <RouterContext {...renderProps}/>
+        </Provider>
       );
       const initialState = store.getState();
       let headSEO = SEO.headSEO(req.url);
+      //var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
       var page = swig.renderFile('./views/index.html', {title: headSEO.title, author: headSEO.author, keywords: headSEO.keywords, description: headSEO.description, maple: maple, initialState: initialState});
       res.status(200).send(page);
     } else {

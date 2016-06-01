@@ -8,13 +8,11 @@ i18n
   .use(Backend)
   .use(LanguageDetector)
   .init({
-
     preload: ['en', 'zh','zh-CN'],
     fallbackLng: 'en',
     // have a common namespace used around the full app
     ns: ['demo', 'a'],
     defaultNS: 'demo',
-    lng: 'zh',
     backend:{
       // path where resources get loaded from
       loadPath: './locales/{{lng}}/{{ns}}.json'
