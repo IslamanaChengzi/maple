@@ -34,6 +34,8 @@
 //};
 var webpack = require('webpack');
 var path = require('path');
+
+
 //var HtmlwebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -50,7 +52,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.js', '.css','.less']
+    extensions: ['', '.js', '.css','.less', '.json']
   },
 
   module: {
@@ -61,6 +63,7 @@ module.exports = {
         loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0,presets[]=stage-1,presets[]=stage-2,presets[]=stage-3'],
         include: __dirname
       },
+      {test: /\.json$/, loader: "json-loader", include: __dirname},
       {test: /\.less$/, loader: "style!css!less", include: __dirname},
       {test:/\.css$/, loader: "style!css", include: __dirname},
       {test: /\.(png|jpg|gif)$/, loader: "url-loader", include: __dirname}

@@ -10,6 +10,8 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './webpack.config';
 
+
+
 import swig from 'swig';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -40,7 +42,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(Express.static(path.join(__dirname, 'public')));
-
+app.use(Express.static(path.join(__dirname, 'locales')));
 //fs.readdirSync(__dirname).forEach(function (file) {
 //  if (fs.statSync(path.join(__dirname, file)).isDirectory())
 //    app.use(rewrite('/' + file + '/*', '/' + file + '/index.html'));

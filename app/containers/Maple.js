@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 import * as DemoActions from '../actions'
 
-import { translate, Interpolate } from 'react-i18next';
-import i18n from '../i18n-client';
+//import { translate, Interpolate } from 'react-i18next';
+import i18n from '../i18n-server';
 
 function mapStateToProps(state) {
   return { demo: state.demo };
@@ -15,14 +15,21 @@ function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(DemoActions, dispatch) }
 }
 
-
+//i18n.init({lng: 'zh'});
 
 class Maple extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      maple: 'maple'
+    };
     //React.initializeTouchEvents(true);  //启用触摸事件处理。
   }
-  //componentWillMount() {}   //服务器端和客户端都只调用一次，在初始化渲染执行之前立刻调用,只调用一次
+  componentWillMount() {
+    this.setState({
+      maple: 'Maple'
+    });
+  }   //服务器端和客户端都只调用一次，在初始化渲染执行之前立刻调用,只调用一次
   //componentDidMount() {}    //服务器端和客户端都只调用一次，在初始化渲染执行之后立刻调用,只调用一次
   //componentWillReceiveProps(nextProps) {} //在组件接收到新的 props 的时候调用。在初始化渲染的时候，该方法不会调用。在该函数中调用 this.setState() 将不会引起第二次渲染。
   //shouldComponentUpdate(nextProps, nextState) {}  //在接收到新的 props 或者 state，将要渲染之前调用。该方法在初始化渲染的时候不会调用，在使用 forceUpdate 方法的时候也不会。如果确定新的 props 和 state 不会导致组件更新，则此处应该 返回 false。
@@ -34,17 +41,16 @@ class Maple extends React.Component {
     console.log(a);
   };
   render() {
-    const { routes } = this.props;
     return (
       <div>
-        <button onClick={ (e) => this.test(e) }>Maple</button>
+        <button onClick={ (e) => this.test(e) }>{this.state.maple}</button>
         {this.props.children}
-        {i18n.t('a:test1')}
+        <span>{i18n.t('demo:test1')}</span>
       </div>
     );
   }
 }
-
+//<span>{i18n.t('a:test1')}</span>
 export default connect(
   mapStateToProps,
   mapDispatchToProps

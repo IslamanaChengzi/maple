@@ -8,6 +8,7 @@ i18n
   .use(XHR)
   .use(LanguageDetector)
   .init({
+    preload: ['en', 'zh','zh-CN'],
     fallbackLng: 'en',
 
     // have a common namespace used around the full app
@@ -20,6 +21,6 @@ i18n
       escapeValue: false // not needed for react!!
     }
   });
-
+//i18n.init({lng: 'en'});
 
 export default i18n;
