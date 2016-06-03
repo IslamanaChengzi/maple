@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import Express from 'express';
+import session from 'express-session';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 
@@ -38,13 +39,6 @@ import * as IPMatch from './app/lib/IPMatch';
 const app = new Express();
 const port = 4000;
 
-var expressRouter = require('express').Router();
-//i18n.init({}, function() {
-//  i18nextMiddleware.addRoute(i18n, '/', ['en', 'zh', 'zh-CN'], expressRouter, 'get', function(req, res) {
-//    console.info(i18n);
-//  });
-//});
-//app.use(i18nextMiddleware.handle(i18n));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -54,7 +48,8 @@ app.use(Express.static(path.join(__dirname, 'locales')));
 //  if (fs.statSync(path.join(__dirname, file)).isDirectory())
 //    app.use(rewrite('/' + file + '/*', '/' + file + '/index.html'));
 //});
-
+//app.use(Express.cookieParser());
+app.use(session({secret:"maple"}));
 
 //引入 webpack 配置
 const compiler = webpack(webpackConfig);
@@ -90,9 +85,9 @@ app.use(function(req, res) {
         applyMiddleware(thunk)
       );
       let headSEO = SEO.headSEO(req.url);
-      let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
-      IPMatch.getLanguage(ip, function(lng) {
-        req.i18n.changeLanguage(lng);
+      if(req.session && req.session.lng) {
+        console.log('session');
+        req.i18n.changeLanguage(req.session.lng);
         const initialState = store.getState();
         const maple = renderToString(
           <I18nextProvider i18n={ i18n }>
@@ -103,8 +98,24 @@ app.use(function(req, res) {
         );
         var page = swig.renderFile('./views/index.html', {title: headSEO.title, author: headSEO.author, keywords: headSEO.keywords, description: headSEO.description, maple: maple, initialState: initialState});
         res.status(200).send(page);
-      });
-
+      } else {
+        console.log('noSession');
+        let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+        IPMatch.getLanguage(ip, function(lng) {
+          req.session.lng = lng;
+          req.i18n.changeLanguage(lng);
+          const initialState = store.getState();
+          const maple = renderToString(
+            <I18nextProvider i18n={ i18n }>
+              <Provider store={store}>
+                <RouterContext { ...renderProps}/>
+              </Provider>
+            </I18nextProvider>
+          );
+          var page = swig.renderFile('./views/index.html', {title: headSEO.title, author: headSEO.author, keywords: headSEO.keywords, description: headSEO.description, maple: maple, initialState: initialState});
+          res.status(200).send(page);
+        });
+      }
     } else {
       res.status(404).send('Not found');
     }

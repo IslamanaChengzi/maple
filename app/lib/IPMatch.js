@@ -10,11 +10,11 @@ export function getLanguage(ip, callback) {
       let country = b.data.country_id;
       switch(country) {
         case "CN" :
-          console.log(country);
+          //console.log(country);
           callback(country);
           break;
         default :
-          console.log(country);
+          //console.log(country);
           callback('en');
           break;
       }
