@@ -8,7 +8,7 @@ i18n
   .use(Backend)
   .use(LanguageDetector)
   .init({
-    preload: ['en', 'zh','zh-CN'],
+    preload: ['en', 'CN'],
     fallbackLng: 'en',
     // have a common namespace used around the full app
     ns: ['demo', 'a'],
@@ -17,7 +17,7 @@ i18n
       // path where resources get loaded from
       loadPath: './locales/{{lng}}/{{ns}}.json'
     },
-    debug: true,  //tips
+    debug: false,  //tips
 
     interpolation: {
       escapeValue: false // not needed for react!!

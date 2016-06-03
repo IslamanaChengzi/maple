@@ -18,9 +18,13 @@
     "maple"
   ],
   "scripts": {
-    "start": "node index",
+    "go": "node index",
     "test": "supervisor index",
-    "watch": "webpack-dev-server --config webpack.config.js --hot --inline --port 4000"
+    "watch": "webpack-dev-server --config webpack.config.js --hot --inline --port 4000",
+    "start": "pm2 start index -name maple",
+    "restart": "pm2 restart",
+    "monit": "pm2 monit",
+    "stop": "pm2 stop maple"
   },
   "repository": {
     "type": "git",
@@ -35,6 +39,7 @@
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
     "express-handlebars": "^3.0.0",
     "express-urlrewrite": "^1.2.0",
     "forever": "^0.15.1",
@@ -89,6 +94,7 @@
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11",
+    "request": "^2.72.0",
     "style-loader": "^0.13.1",
     "todomvc-app-css": "^2.0.6",
     "url-loader": "^0.5.7",

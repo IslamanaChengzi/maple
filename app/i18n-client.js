@@ -8,9 +8,8 @@ i18n
   .use(XHR)
   .use(LanguageDetector)
   .init({
-    preload: ['en', 'zh','zh-CN'],
+    preload: ['en', 'CN'],
     fallbackLng: 'en',
-    //lng: 'zh',
     // have a common namespace used around the full app
     ns: ['demo', 'a'],
     defaultNS: 'demo',
