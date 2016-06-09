@@ -3,16 +3,19 @@
 ## React Maple 1.0版本
 
 ```
-$ npm install 安装插件 
+$ npm install 安装插件
+$ webpack     生成js,css文件
 ```
 #####普通开发模式：
 ```
+$ webpack -w
 $ npm run test 页面刷新模式
 浏览器输入：localhost:4000
 ```
 #####HOT开发模式：
 ```
-$ npm run watch 
+$ webpack -w
+$ npm run watch
 浏览器输入：localhost:4000
 ```
 
