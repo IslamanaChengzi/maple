@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/../fusion" libraries="{fusion node_modules}" />
     <file url="file://$PROJECT_DIR$" libraries="{maple node_modules}" />
+    <file url="file://$PROJECT_DIR$/../maple-base" libraries="{maple-base node_modules}" />
   </component>
 </project>

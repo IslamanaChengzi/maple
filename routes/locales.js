@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET page. */
 router.get('/*', function(req, res, next) {
-  res.send(require('../locales/'+req.url));
+  res.send(require('../locales'+req.url));
 });
 
 

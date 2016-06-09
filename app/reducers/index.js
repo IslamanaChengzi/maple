@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { routerReducer  } from 'react-router-redux';
-import demo from './demo';
+import maple from './maple';
 import locales from './locales';
 
 const rootReducer = combineReducers({
-  demo,
+  maple,
   locales,
   routing: routerReducer
 });

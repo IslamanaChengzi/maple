@@ -49,7 +49,7 @@ app.use(Express.static(path.join(__dirname, 'locales')));
 //    app.use(rewrite('/' + file + '/*', '/' + file + '/index.html'));
 //});
 //app.use(Express.cookieParser());
-app.use(session({secret:"maple"}));
+app.use(session({secret:"maple", cookie: {maxAge: 24 * 3600 * 1000 }}));
 
 //引入 webpack 配置
 const compiler = webpack(webpackConfig);
@@ -92,7 +92,7 @@ app.use(function(req, res) {
         const maple = renderToString(
           <I18nextProvider i18n={ i18n }>
             <Provider store={store}>
-              <RouterContext { ...renderProps}/>
+              <RouterContext { ...renderProps} i18n={ i18n }/>
             </Provider>
           </I18nextProvider>
         );
@@ -108,7 +108,7 @@ app.use(function(req, res) {
           const maple = renderToString(
             <I18nextProvider i18n={ i18n }>
               <Provider store={store}>
-                <RouterContext { ...renderProps}/>
+                <RouterContext { ...renderProps} />
               </Provider>
             </I18nextProvider>
           );

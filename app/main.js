@@ -24,7 +24,7 @@ ReactDOM.render(
   <I18nextProvider i18n={ i18n }>
     <Provider store={store}>
       <Router history={history}>
-        {Routers}
+        {Routers }
       </Router>
     </Provider>
   </I18nextProvider>,

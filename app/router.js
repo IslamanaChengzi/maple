@@ -1,14 +1,12 @@
 import React from 'react';
 import { Router, Route, Link, IndexRoute, Redirect } from 'react-router';
 
-import Demo from './components/Demo';
 import Maple from './containers/Maple';
-import Home from './containers/Home';
+import Home from './containers/Home/Home';
 
 export default (
   <Route path='/' component={ Maple } >
     <IndexRoute component={ Home } />
-    <Route path='demo' component={ Demo } />
   </Route>
 );
 

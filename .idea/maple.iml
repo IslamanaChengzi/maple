@@ -4,8 +4,11 @@
     <content url="file://$USER_HOME$/Desktop/UserCenter" />
     <content url="file://$MODULE_DIR$/../fusion" />
     <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$/../maple-base" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="maple node_modules" level="project" />
+    <orderEntry type="library" name="fusion node_modules" level="project" />
+    <orderEntry type="library" name="maple-base node_modules" level="project" />
   </component>
 </module>

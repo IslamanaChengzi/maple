@@ -1,2 +1,2 @@
-export const DEMO_TEST = 'DEMO_TEST';
+export const MAPLE = 'MAPLE';
 export const LOCALES = 'LOCALES';
